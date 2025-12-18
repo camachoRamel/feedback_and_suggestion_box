@@ -1,76 +1,91 @@
-@extends('layouts.default')
+@extends('layouts.guest')
 
 @section('title', 'Register')
 
 @section('content')
-<div class="w-full max-w-md">
-    <div class="card bg-base-100 shadow-xl">
-        <div class="card-body space-y-4">
-            <h2 class="card-title justify-center">Register</h2>
+<div class="space-y-5 sm:space-y-6">
+    <div class="text-center space-y-1">
+        <h1 class="text-2xl sm:text-3xl font-bold">Create an account</h1>
+        <p class="text-xs sm:text-sm opacity-70">
+            Register as a customer or admin.
+        </p>
+    </div>
 
-            <form method="POST" action="#">
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body space-y-4 sm:space-y-5">
+            <form method="POST" action="{{ route('register') }}" class="space-y-4 sm:space-y-5">
                 @csrf
 
-                <div class="form-control mb-3">
-                    <span class="label-text mb-1">Type</span>
-                    <div class="flex gap-6">
-                        <label class="label cursor-pointer gap-2">
-                            <input type="radio" name="type" value="customer"
-                                   class="radio radio-sm" checked />
+                {{-- Type --}}
+                <div class="form-control">
+                    <span class="label-text mb-2 font-medium text-sm">Type</span>
+                    <div class="flex flex-wrap gap-4 text-sm">
+                        <label class="label cursor-pointer gap-2 p-0">
+                            <input type="radio" name="type" value="0" class="radio radio-sm" checked>
                             <span class="label-text">Customer</span>
                         </label>
-                        <label class="label cursor-pointer gap-2">
-                            <input type="radio" name="type" value="admin"
-                                   class="radio radio-sm" />
+                        <label class="label cursor-pointer gap-2 p-0">
+                            <input type="radio" name="type" value="1" class="radio radio-sm">
                             <span class="label-text">Admin</span>
                         </label>
                     </div>
                 </div>
 
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">First name</span>
-                    </label>
-                    <input type="text" name="first_name"
-                           class="input input-bordered w-full" />
+                {{-- Names --}}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-sm">First name</span>
+                        </label>
+                        <input type="text" name="first_name"
+                               class="input input-bordered input-sm sm:input-md"
+                               value="{{ old('first_name') }}" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-sm">Middle name</span>
+                        </label>
+                        <input type="text" name="middle_name"
+                               class="input input-bordered input-sm sm:input-md"
+                               value="{{ old('middle_name') }}">
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-sm">Last name</span>
+                        </label>
+                        <input type="text" name="last_name"
+                               class="input input-bordered input-sm sm:input-md"
+                               value="{{ old('last_name') }}" required>
+                    </div>
                 </div>
 
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Middle name</span>
-                    </label>
-                    <input type="text" name="middle_name"
-                           class="input input-bordered w-full" />
+                {{-- Username / password --}}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-sm">Username</span>
+                        </label>
+                        <input type="text" name="username"
+                               class="input input-bordered input-sm sm:input-md"
+                               value="{{ old('username') }}" required>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text text-sm">Password</span>
+                        </label>
+                        <input type="password" name="password"
+                               class="input input-bordered input-sm sm:input-md" required>
+                    </div>
                 </div>
-
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Last name</span>
-                    </label>
-                    <input type="text" name="last_name"
-                           class="input input-bordered w-full" />
-                </div>
-
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text">Username</span>
-                    </label>
-                    <input type="text" name="username"
-                           class="input input-bordered w-full" />
-                </div>
-
-                <div class="form-control mb-4">
-                    <label class="label">
-                        <span class="label-text">Password</span>
-                    </label>
-                    <input type="password" name="password"
-                           class="input input-bordered w-full" />
-                </div>
-
-                <div class="form-control">
-                    <button class="btn btn-primary w-full">REGISTER</button>
-                </div>
+                <button type="submit" class="btn btn-primary w-full mt-2">
+                    REGISTER
+                </button>
             </form>
+
+            <div class="text-center text-xs sm:text-sm">
+                <span>Already have an account?</span>
+                <a href="{{ route('showLoginForm') }}" class="link link-primary ml-1">Login</a>
+            </div>
         </div>
     </div>
 </div>

@@ -8,10 +8,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-base-200 flex flex-col">
-    <x-navbar />
-
-    <main class="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        @yield('content')
+    <main class="flex-1 flex items-center justify-center px-4 py-8 sm:py-10">
+        <div class="w-full max-w-xl">
+            @yield('content')
+        </div>
     </main>
 
     <x-footer />

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('box_id');
-            $table->integer('likes');
+            $table->integer('likes')->default(0);
             $table->string('content');
             $table->string('type');
             $table->softDeletes();

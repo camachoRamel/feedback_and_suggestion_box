@@ -1,41 +1,57 @@
-@extends('layouts.default')
+@extends('layouts.guest')
 
 @section('title', 'Login')
 
 @section('content')
-<div class="w-full max-w-md">
-    <div class="card shadow-xl">
-        <div class="card-body space-y-4">
-            <h2 class="card-title justify-center">Login</h2>
+<div class="space-y-5 sm:space-y-6">
+    <div class="text-center space-y-1">
+        <h1 class="text-2xl sm:text-3xl font-bold">Welcome back</h1>
+        <p class="text-xs sm:text-sm opacity-70">
+            Login to access your feedback boxes.
+        </p>
+    </div>
 
-            <form method="POST" action="#">
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body space-y-4 sm:space-y-5">
+            <form method="POST" action="{{ route('login') }}" class="space-y-4 sm:space-y-5">
                 @csrf
 
-                <div class="form-control mb-3">
+                <div class="form-control">
                     <label class="label">
-                        <span class="label-text">Username</span>
+                        <span class="label-text text-sm">Username</span>
                     </label>
-                    <input type="text" name="username"
-                           class="input input-bordered w-full" />
-                </div>
-
-                <div class="form-control mb-4">
-                    <label class="label">
-                        <span class="label-text">Password</span>
-                    </label>
-                    <input type="password" name="password"
-                           class="input input-bordered w-full" />
+                    <input type="text"
+                           name="username"
+                           value="{{ old('username') }}"
+                           class="input input-bordered w-full text-sm"
+                           required autofocus>
+                    @error('username')
+                        <span class="text-error text-xs mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-control">
-                    <button class="btn btn-primary w-full">LOGIN</button>
+                    <label class="label">
+                        <span class="label-text text-sm">Password</span>
+                    </label>
+                    <input type="password"
+                           name="password"
+                           class="input input-bordered w-full text-sm"
+                           required>
+                    @error('password')
+                        <span class="text-error text-xs mt-1">{{ $message }}</span>
+                    @enderror
                 </div>
+
+                <button type="submit" class="btn btn-primary w-full mt-2">
+                    LOGIN
+                </button>
             </form>
 
-            <p class="text-center text-sm mt-3">
-                Don’t have an account?
-                <a href="{{ route('register') }}" class="link link-primary">Register</a>
-            </p>
+            <div class="text-center text-xs sm:text-sm">
+                <span>Don’t have an account?</span>
+                <a href="{{ route('showRegisterForm') }}" class="link link-primary ml-1">Register</a>
+            </div>
         </div>
     </div>
 </div>
